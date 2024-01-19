@@ -1,0 +1,27 @@
+E-Commerce
+Login & Registration
+User Management
+Brand Management
+Store Management
+Product Management
+Featured Products
+Private Customer Management
+Order Management
+Payment Management
+Invoice Management
+Ledger Management
+User Activity Management
+
+
+MBS
+Login & Registration
+User Management
+Manufacturer Management
+Manufacturer Products Management
+Master Products Management
+Order Management
+Delivery Management
+Payment Management
+Invoice Management
+Ledger Management
+User Activity Management
