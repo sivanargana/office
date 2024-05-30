@@ -1,0 +1,18 @@
+<msr-table-panel *ngIf="getColumns(columns,'left')?.length" class="panel-left">
+    <ng-container *ngFor="let column of getColumns(columns,'left')">
+        <msr-table-column [rows]="rows" [column]="column" *ngIf="!column.children"></msr-table-column>
+        <msr-table-group [rows]="rows" [column]="column" *ngIf="column.children"></msr-table-group>
+    </ng-container>
+</msr-table-panel>
+<msr-table-panel>
+    <ng-container *ngFor="let column of getColumns(columns)">
+        <msr-table-column [rows]="rows" [column]="column" *ngIf="!column.children"></msr-table-column>
+        <msr-table-group [rows]="rows" [column]="column" *ngIf="column.children"></msr-table-group>
+    </ng-container>
+</msr-table-panel>
+<msr-table-panel *ngIf="getColumns(columns,'right')?.length"  class="panel-right">
+    <ng-container *ngFor="let column of getColumns(columns,'right')">
+        <msr-table-column [rows]="rows" [column]="column" *ngIf="!column.children"></msr-table-column>
+        <msr-table-group [rows]="rows" [column]="column" *ngIf="column.children"></msr-table-group>
+    </ng-container>
+</msr-table-panel>

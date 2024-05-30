@@ -1,0 +1,17 @@
+<msr-table-column-header>
+    <msr-table-cell>{{column.headerName}}</msr-table-cell>
+</msr-table-column-header>
+<msr-table-column-body>
+    <ng-container *ngFor="let row of rows">
+
+        <msr-table-cell>
+            <ng-container *ngIf="!column.cellTemplate">
+                {{row[column.field]}}
+            </ng-container>
+            <ng-container *ngIf="column.cellTemplate">
+                <ng-container *ngTemplateOutlet="column.cellTemplate;context:{$implicit:row[column.field]}"></ng-container>
+             </ng-container>
+        </msr-table-cell>
+    
+    </ng-container>
+</msr-table-column-body>

@@ -1,0 +1,8 @@
+<msr-table-group-header>
+    <msr-table-cell>{{column.headerName}}</msr-table-cell>
+</msr-table-group-header>
+<msr-table-group-body>
+    <ng-container *ngFor="let group of column.children">
+        <msr-table-column [rows]="rows" [column]="group"></msr-table-column>
+    </ng-container>
+</msr-table-group-body>
