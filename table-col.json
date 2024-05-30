@@ -1,0 +1,115 @@
+  this.msrColumns = [
+      {
+        field: 'retailerName',
+        headerName: "Retailer Name",
+        pinned:'left'
+     
+      },
+      {
+        field: 'groupName',
+        headerName: "Group Name",
+    
+      },
+      {
+        field: 'phoneNumber',
+        headerName: "Phone Number",
+      
+      },
+      {
+        field: 'cityName',
+        headerName: "Location",
+     
+      },
+      {
+        field: 'createdOn',
+        headerName: "Created On",
+   
+      },
+      {
+        field: 'lastLogin',
+        headerName: "Last Login Time",
+      
+      },
+      {
+        headerName: "Order Counts",
+        children: [
+          {
+            field: 'retailerOrderCount',
+            headerName: "Retailer",
+          },
+          {
+            field: 'customerOrderCount',
+            headerName: "Customer",
+          },
+        ]
+      },
+      {
+        headerName: "Featured Product Counts",
+        children: [
+          {
+            field: 'featuredProductsCount',
+            headerName: "All",
+       
+          },
+          {
+            field: 'activeFeaturedProductsCount',
+            headerName: "Active",
+         
+          },
+          {
+            field: 'inActiveFeaturedProductsCount',
+            headerName: "Inactive",
+           
+          },
+          {
+            field: 'wishListCount',
+            headerName: "Favourites",
+     
+          }
+        ]
+      },
+      {
+        headerName: "Invitations",
+        children: [
+          {
+            field: 'totalCustomers',
+            headerName: "Sent",
+          },
+          {
+            field: 'acceptedCount',
+            headerName: "Accepted",
+          },
+          {
+            field: 'pendingCount',
+            headerName: "Pending",
+          },
+          {
+            field: 'migratedCount',
+            headerName: "Migrated",
+          },
+          {
+            field: 'rejectedCount',
+            headerName: "Rejected",
+          }
+        ]
+      }, {
+        headerName: "Status",
+        children: [
+          {
+            field: 'status',
+            headerName: "Current",
+            cellTemplate:this.currentStatus
+          },
+          {
+            field: 'verificationStatus',
+            headerName: "Verified",
+            cellTemplate:this.verificationStatus
+          },
+          {
+            field: 'kycStatus',
+            headerName: "KYC",
+            cellTemplate:this.kycStatus
+          }
+        ]
+      }
+    ] ;
