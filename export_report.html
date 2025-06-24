@@ -1,0 +1,970 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Social Media Report</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" type="text/css">
+    
+        <style>
+
+            @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+            @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+            @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+            :root {
+            --bg: #8e54e9;
+            --card-tile-color: 143, 193, 255;
+            --tw-text-opacity: 1;
+            --tw-bg-opacity: 1;
+            --primary: var(--bg);
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --primary-50: color-mix(in srgb, var(--bg), white 90%);
+            --primary-100: color-mix(in srgb, var(--bg), white 80%);
+            --primary-200: color-mix(in srgb, var(--bg), white 60%);
+            --primary-300: color-mix(in srgb, var(--bg), white 40%);
+            --primary-400: color-mix(in srgb, var(--bg), white 20%);
+            --primary-500: var(--bg);
+            --primary-600: color-mix(in srgb, var(--bg), black 20%);
+            --primary-700: color-mix(in srgb, var(--bg), black 40%);
+            --primary-800: color-mix(in srgb, var(--bg), black 60%);
+            --primary-900: color-mix(in srgb, var(--bg), black 80%);
+            --primary-950: color-mix(in srgb, var(--bg), black 90%);
+            }
+
+            @page {
+                size: 508mm 285.75mm;
+                margin: 0;
+            }
+            body {
+            {% comment %} font-family: "DM Sans", sans-serif; {% endcomment %}
+            font-size: 23px;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #111;
+            }
+
+            .cover-page {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 40px 60px;
+                box-sizing: border-box;
+              }
+              .left-section {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+              }
+              .name-tag {
+                background-color: #1A4F85;
+                font-family: "Times New Roman", Times, serif;
+                color: white;
+                font-size: 90px;
+                font-weight: bold;
+                border-radius: 60px;
+                padding: 30px 30px;
+                display: inline-block;
+                margin-bottom: 100px;
+                margin-top: 100px;
+              }
+              .profile-img {
+                width: 850px;
+                height: 850px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid #eee;
+              }
+              .right-section {
+                  margin-top: 300px;
+                  flex: 1 1 auto;
+                  padding-left: 200px;
+              }
+              .title {
+                font-size: 120px;
+                font-weight: 600;
+                line-height: 1.2;
+              }
+              .subtitle {
+                font-size: 45px;
+                margin-top: 40px;
+                font-weight: 600;
+              }
+              .subtitle strong {
+                color: #1A4F85;
+              }
+
+            .container {
+            width: 100%;
+            margin: 0 auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            }
+
+            .pdf-text-sm {
+            font-size: 0.7rem;
+            }
+
+            .pdf-text-base {
+            font-size: 0.9rem;
+            }
+
+            .pdf-text-lg {
+            font-size: 1.125rem;
+            }
+
+            .pdf-text-xl {
+            font-size: 1.25rem;
+            }
+
+            .pdf-text-2xl {
+            font-size: 3rem;
+            }
+
+            .pdf-ml-auto {
+            margin-left: auto;
+            }
+
+            .pdf-mr-auto {
+            margin-right: auto;
+            }
+
+            .pdf-font-bold {
+            font-weight: bold;
+            }
+
+            .pdf-block {
+            display: block;
+            }
+
+            .pdf-inline-block {
+            display: inline-block;
+            }
+
+            .pdf-to-primary-50 {
+            --tw-gradient-to: var(--primary-50) var(--tw-gradient-to-position);
+            }
+
+            .pdf-from-primary-200 {
+            --tw-gradient-from: var(--primary-200) var(--tw-gradient-from-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+            }
+
+            .pdf-bg-gradient-to-r {
+            background-image: linear-gradient(to right, var(--tw-gradient-stops));
+            }
+
+            .pdf-bg-primary {
+            background-color: var(--primary-500);
+            }
+
+            .pdf-text-primary-600 {
+            color: var(--primary-600);
+            }
+
+            .pdf-rounded {
+            border-radius: 0.25rem;
+            }
+
+            .table-center {
+            display: flex;
+            justify-content: center;     /* center horizontally */
+            align-items: center;         /* center vertically (if needed) */
+            gap: 50px;                   /* spacing between SVG and table */
+            width: 100%;                 /* ensure it spans full width */
+            margin: 0 auto;              /* center the whole container */
+            }
+
+            .pdf-insights {
+            margin-top: 25px;
+            padding: 7px;
+            font-size: 25px;
+            }
+
+            .pdf-list-none {
+            list-style-type: none;
+            }
+
+            .pdf-m-0 {
+            margin: 0px;
+            }
+
+            .pdf-p-0 {
+            padding: 0px;
+            }
+
+            .pdf-relative {
+            position: relative;
+            }
+
+            .pdf-absolute {
+            position: absolute;
+            }
+
+            .pdf-list .pdf-list-item {
+            line-height: 30px;
+            font-size: 23px;
+            padding-left: 20px;
+            padding-bottom: 10px;
+            position: relative;
+            }
+
+            .pdf-list .pdf-list-item::before {
+            content: "";
+            display: block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary-500);
+            border-radius: 9999px;
+            position: absolute;
+            top: 10px;
+            left: 0px;
+            }
+
+            .pdf-section {
+            --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color),
+                0 1px 2px -1px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+                var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+            padding: 30px;
+            background-color: white; /*rgb(255 255 255 / var(--tw-bg-opacity, 1)); */
+            border-radius: 0.5rem;
+            }
+
+            .pdf-section-header {
+            position: relative;
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            }
+
+            .pdf-section-header::before {
+            content: "";
+            display: block;
+            background-color: var(--primary);
+            width: 50px;
+            height: 3px;
+            position: absolute;
+            top: 100%;
+            }
+
+            .pdf-text-center {
+            text-align: center !important;
+            }
+
+            .pdf-text-left {
+            text-align: left !important;
+            }
+
+            .pdf-text-right {
+            text-align: right !important;
+            }
+
+            .pdf-gap-4 {
+            gap: 4px;
+            }
+
+            .pdf-gap-5 {
+            gap: 5px;
+            }
+
+            .pdf-gap-10 {
+            gap: 10px;
+            }
+
+            .pdf-gap-15 {
+            gap: 15px;
+            }
+
+            .pdf-gap-20 {
+            gap: 20px;
+            }
+
+            .pdf-gap-25 {
+            gap: 25px;
+            }
+
+            .pdf-gap-30 {
+            gap: 30px;
+            }
+
+            .pdf-flex {
+            display: flex;
+            flex-wrap: wrap;
+            }
+
+            .pdf-flex-col {
+            flex-direction: column;
+            }
+
+            .pdf-flex-auto {
+            flex: 1 1 auto;
+            }
+
+            .pdf-flex-items-center {
+            align-items: center;
+            }
+
+            .pdf-flex-justify-center {
+            justify-content: center;
+            }
+
+            .pdf-flex-justify-between {
+            justify-content: space-between;
+            }
+
+            .pdf-card {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background: #ffffff;
+            border-radius: 5px;
+            height: 100%;
+            }
+
+            .pdf-card .pdf-card-body {
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            padding: 12px 15px;
+            }
+
+            .pdf-card .pdf-card-body [data-symbol] {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background-color: rgb(191 219 254 / 50%);
+            }
+
+            .pdf-card-grade {
+            background: linear-gradient(
+                -45deg,
+                rgba(var(--card-tile-color), 40%) -50%,
+                white 100%
+            );
+            color: rgb(30 58 138 / var(--tw-text-opacity, 1)) !important;
+            }
+
+            .platforms {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            }
+
+            .platforms li {
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+            }
+
+            .platforms li:last-child {
+            border-bottom: none;
+            }
+
+            .txt-instagram {
+            color: #c40189;
+            }
+
+            .txt-facebook {
+            color: #3f51b5;
+            }
+
+            .txt-twitter {
+            color: #0f1419;
+            }
+
+            .txt-youtube {
+            color: #f44336;
+            }
+
+            .pdf-text-muted {
+                color: #9ca3af;
+            }
+
+            .pdf-table {
+                width: 100%; 
+                border-collapse: collapse; 
+                overflow: hidden; 
+                border: 1px solid #e0e0e0;
+            }
+
+            .pdf-table thead tr {
+                background: #f9fafb; 
+                color: #6b7280;
+            }
+
+            .pdf-table tbody tr {
+                border-top: 1px solid #e5e7eb;
+            }
+
+            .pdf-table thead tr th {
+                text-align: left;  
+                font-weight: 600;
+            }
+
+            .pdf-table thead tr th, .pdf-table tbody tr td {
+                padding: 12px 16px;
+            }
+
+            .pdf-table tbody td .compare-trend-bubble {
+                background: #fee2e2;
+                font-weight: 600; 
+                font-size: 16px; 
+                padding: 2px 6px; 
+                border-radius: 12px; 
+                margin-left: 6px; 
+                display: inline-block;
+            }
+
+            .pdf-card,
+            .pdf-section,
+            .stats-grid,
+            .stat-box {
+            page-break-inside: avoid;
+            break-inside: avoid;
+            }
+
+            .page-break {
+            page-break-before: always;
+            break-before: page;
+            }
+
+            .page-break {
+            page-break-before: always;
+            }
+
+            .avoid-break {
+            page-break-inside: avoid;
+            break-inside: avoid;
+            }
+
+            @media (min-width: 640px) {
+            .container {
+                max-width: 640px;
+            }
+            }
+
+            @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
+            }
+            }
+
+            @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px;
+            }
+            }
+
+            @media (min-width: 1280px) {
+            .container {
+                max-width: 1280px;
+            }
+            }
+        </style>
+
+        <meta charset="UTF-8">
+    </head>
+    <body>
+
+        <div class="container pdf-flex pdf-flex-col pdf-gap-10">
+            <!-- Cover Page -->
+            <div class="pdf-section pdf-flex pdf-gap-10">
+                <!-- Left: Name and Photo -->
+                <div class="pdf-flex">
+                  <div class="name-tag">{{profile_details.name}}</div>
+                  <img src="https://staticstojp.blob.core.windows.net/media/images.jpg" alt="Profile" class="profile-img">
+                </div>
+            
+                <!-- Right: Title and Details -->
+                <div class="pdf-flex">
+                  <div class="title">Sentiment<br>Analysis Report</div>
+                  <div class="subtitle"><strong>Last {{profile_details.diff_days}} Days</strong> ({{ date_range_formatted | safe }})</div>
+            </div>
+
+            <!-- Summary -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Summary</div>
+                <div class="pdf-flex pdf-flex-items-center pdf-gap-10">
+                    <div class="pdf-flex-auto">
+                        <div class="pdf-card pdf-card-grade">
+                            <div class="pdf-card-body pdf-text-center">
+                                <div class="pdf-flex pdf-flex-items-center pdf-flex-justify-between">
+                                    <div>
+                                        <i data-symbol class="fa fa-at"></i>
+                                    </div>
+                                    <div class="pdf-flex pdf-flex-col pdf-text-right">
+                                        <strong class="pdf-text-xl">{{ 01_overall.formated_data.count }}</strong>
+                                        <div class="pdf-text-sm pdf-font-bold">
+                                            Total Mentions
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pdf-flex-auto">
+                        <div class="pdf-card pdf-card-grade">
+                            <div class="pdf-card-body pdf-text-center">
+                                <div class="pdf-flex pdf-flex-items-center pdf-flex-justify-between">
+                                    <div>
+                                        <i data-symbol class="fa fa-at"></i>
+                                    </div>
+                                    <div class="pdf-flex pdf-flex-col pdf-text-right">
+                                        <strong class="pdf-text-xl">{{ 01_overall.formated_data.count }}</strong>
+                                        <div class="pdf-text-sm pdf-font-bold">
+                                            Social Mentions
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pdf-flex-auto">
+                        <div class="pdf-card pdf-card-grade">
+                            <div class="pdf-card-body pdf-text-center">
+                                <div class="pdf-flex pdf-flex-items-center pdf-flex-justify-between">
+                                    <div>
+                                        <i data-symbol class="fa fa-wifi"></i>
+                                    </div>
+                                    <div class="pdf-flex pdf-flex-col pdf-text-right">
+                                        <strong class="pdf-text-xl">{{ 01_overall.formated_data.views_sum }}</strong>
+                                        <div class="pdf-text-sm pdf-font-bold">
+                                            Social Reach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pdf-flex-auto">
+                        <div class="pdf-card pdf-card-grade">
+                            <div class="pdf-card-body pdf-text-center">
+                                <div class="pdf-flex pdf-flex-items-center pdf-flex-justify-between">
+                                    <div>
+                                        <i data-symbol class="fa fa-handshake"></i>
+                                    </div>
+                                    <div class="pdf-flex pdf-flex-col pdf-text-right">
+                                        <strong class="pdf-text-xl">{{ 01_overall.formated_data.engagement_sum }}</strong>
+                                        <div class="pdf-text-sm pdf-font-bold">
+                                            Engagement
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pdf-flex-auto">
+                        <div class="pdf-card pdf-card-grade">
+                            <div class="pdf-card-body pdf-text-center">
+                                <div class="pdf-flex pdf-flex-items-center pdf-flex-justify-between">
+                                    <div>
+                                        <i data-symbol class="fa fa-thumbs-up"></i>
+                                    </div>
+                                    <div class="pdf-flex pdf-flex-col pdf-text-right">
+                                        <strong class="pdf-text-xl">{{ 01_overall.formated_data.positive_count }}</strong>
+                                        <div class="pdf-text-sm pdf-font-bold">
+                                            Positive Mentions
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pdf-flex-auto">
+                        <div class="pdf-card pdf-card-grade">
+                            <div class="pdf-card-body pdf-text-center">
+                                <div class="pdf-flex pdf-flex-items-center pdf-flex-justify-between">
+                                    <div>
+                                        <i data-symbol class="fa fa-thumbs-down"></i>
+                                    </div>
+                                    <div class="pdf-flex pdf-flex-col pdf-text-right">
+                                        <strong class="pdf-text-xl">{{ 01_overall.formated_data.negative_count }}</strong>
+                                        <div class="pdf-text-sm pdf-font-bold">
+                                            Negative Mentions
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2
+                        class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                        Insights
+                    </h2>
+                    <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                        {% for insight in 01_overall.insights %}
+                        <li class="pdf-list-item">
+                            <strong>{{ insight.title }}:</strong>{{ insight.description }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <!-- Category Wise -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Category Wise</div>
+                <div class="table-center">
+                        <div>
+                            <ul class="pdf-list platforms pdf-list-none pdf-m-0 pdf-p-0 pdf-flex pdf-flex-col">
+                                {% for item in 02_plaformwise.data %}
+                                <li class="pdf-flex pdf-flex-items-center">
+                                    <div class="pdf-flex pdf-gap-10 pdf-flex-items-center">
+                                        <i class="fab fa-fw fa-{{ item.platform|lower }} txt-{{ item.platform|lower }}"></i>
+                                        <span class="pdf-font-bold">{{ item.count|intcomma }}</span>
+                                    </div>
+                                    <div class="pdf-ml-auto pdf-font-bold txt-{{ item.platform|lower }} ">
+                                        {{ item.percentage|floatformat:2 }}%
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                </div>
+                    <div class="pdf-flex pdf-flex-col pdf-gap-10">
+                        <div>
+                            <h2 class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                                Insights
+                            </h2>
+                            <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                                {% for insight in 02_plaformwise.insights.observations %}
+                                <li class="pdf-list-item">
+                                    <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                                Suggestions
+                            </h2>
+                            <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                                {% for insight in 02_plaformwise.insights.suggestions %}
+                                <li class="pdf-list-item">
+                                    <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Comparison -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Detailed Comparison</div>
+                <div class="pdf-flex pdf-gap-30">
+                    <div class="pdf-flex pdf-flex-col table-center pdf-gap-10">
+                        <table class="pdf-table" class="avoid-break", style="width: 900px;">
+                            <thead>
+                              <tr>
+                                <th>Metrics</th>
+                                <th>
+                                  Current<br>
+                                  <span class="pdf-text-sm pdf-text-muted">(01/06/2025 to 08/06/2025)</span>
+                                </th>
+                                <th>
+                                  Previous<br>
+                                  <span class="pdf-text-sm pdf-text-muted">(26/05/2025 to 01/06/2025)</span>
+                                </th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for row in 03_compare_analysis.data %}
+                                <tr>
+                                  <td>{{ row.label }}</td>
+                                  <td>
+                                    <strong>{{ row.current }}</strong>
+                                    <span class="compare-trend-bubble" style="color: {{ row.color }}">
+                                      <i class="fa-solid {{ row.trend_icon }}"></i>
+                                      {% if not row.is_positive %} {% endif %}{{ row.percentage_change }}%
+                                    </span>
+                                  </td>                              
+                                  <td class="pdf-font-bold">{{ row.previous }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="pdf-flex pdf-flex-col pdf-gap-10">
+                        <div>
+                            <h2 class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                                Insights
+                            </h2>
+                            <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                                {% for insight in 03_compare_analysis.insights.comparative_summary %}
+                                <li class="pdf-list-item">
+                                    <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                                </li>
+                                {% endfor %} 
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggestions -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Suggestions</div>
+                <div class="pdf-flex pdf-gap-30">
+                    <div class="pdf-flex pdf-flex-col pdf-items-center pdf-gap-10">
+        
+                        <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                            {% for insight in 04_suggestions.insights.response %}
+                            <li class="pdf-list-item">
+                                <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trends -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Trends</div>
+                <div class="table-center">
+                    <div class="pdf-flex pdf-flex-col pdf-items-center pdf-gap-10">
+                        <div class="!w-full">{{ 05_datewise_mentions.trends_graph | safe  }} </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Summary</div>
+                <div class="pdf-flex pdf-gap-30">
+                    <div class="pdf-flex pdf-flex-col pdf-items-center pdf-gap-10">
+        
+                        <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                            {% for insight in 05_datewise_mentions.insights.summary %}
+                            <li class="pdf-list-item">
+                                <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Events -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Key Events</div>
+                <div class="pdf-flex pdf-gap-30">
+                    <div class="pdf-flex pdf-flex-col pdf-items-center pdf-gap-10">
+        
+                        <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                            {% for insight in 06_peak_mentions.insights.peaks %}
+                            <li class="pdf-list-item">
+                                <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentiment Analysis -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Sentiment Analysis</div>
+                <div class="table-center">
+                    <div class="pdf-flex pdf-flex-col pdf-items-center pdf-gap-10">
+                        <div class="pdf-flex pdf-gap-30">
+                            <div class="pdf-flex pdf-flex-col pdf-items-center pdf-gap-10">
+                                <div class="!w-full">{{ 07_sentiment_analysis.analysis_graph | safe  }} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentiment Analysis Summary -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Sentiment Analysis Summary</div>
+                <div class="pdf-flex pdf-gap-30">
+                    <div class="pdf-flex pdf-flex-col pdf-items-center pdf-gap-10">
+        
+                        <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                            {% for insight in 07_sentiment_analysis.insights.summary %}
+                            <li class="pdf-list-item">
+                                <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Events -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Key Events</div>
+                <div class="pdf-flex pdf-gap-30">
+                    <div class="pdf-flex pdf-flex-col pdf-items-center pdf-gap-10">
+        
+                        <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                            {% for insight in 08_peak_sentiment_mentions.insights.peaks %}
+                            <li class="pdf-list-item">
+                                <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--Positive Mentions -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10 avoid-break" >
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Positive Mentions</div>
+                <div class="pdf-flex pdf-gap-30">
+                    <div class="pdf-flex pdf-flex-col pdf-items-center pdf-gap-10">
+                        {% comment %} <h1>Needed styles for</h1> {% endcomment %}
+                    </div>
+                </div>
+                <div class="pdf-flex pdf-flex-col pdf-gap-10">
+                    <div>
+                        <h2 class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                            Insights
+                        </h2>
+                        <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                            {% for insight in 10_positive_and_negative_mentions.insights.positive_mentions_analysis.observations %}
+                            <li class="pdf-list-item">
+                                <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div class="pdf-flex pdf-flex-col pdf-gap-10">
+                    <div>
+                        <h2 class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                            Suggestions
+                        </h2>
+                        <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                            {% for insight in 10_positive_and_negative_mentions.insights.positive_mentions_analysis.suggestions %}
+                            <li class="pdf-list-item">
+                                <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!--Negative Mentions -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10 ">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Negative Mentions</div>
+                <div class="pdf-flex pdf-gap-30">
+                    {% comment %} <h1>Needed styles for</h1> {% endcomment %}
+                </div>
+                <div class="pdf-flex pdf-flex-col pdf-gap-10">
+                    <div>
+                        <h2 class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                            Insights
+                        </h2>
+                        <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                            {% for insight in 10_positive_and_negative_mentions.insights.negative_mentions_analysis.observations %}
+                            <li class="pdf-list-item">
+                                <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div class="pdf-flex pdf-flex-col pdf-gap-10">
+                    <div>
+                        <h2 class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                            Suggestions
+                        </h2>
+                        <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                            {% for insight in 10_positive_and_negative_mentions.insights.negative_mentions_analysis.suggestions %}
+                            <li class="pdf-list-item">
+                                <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!--Trending Hashtags -->
+            <div class="pdf-section pdf-flex pdf-flex-col pdf-gap-10">
+                <div class="pdf-section-header pdf-text-2xl pdf-font-bold">Trending Hashtags</div>
+                <div class="pdf-flex pdf-gap-30">
+                    <div class="pdf-flex pdf-flex-col table-center pdf-gap-10">
+                        <table class="pdf-table" class="avoid-break" style="width: 600px; height: 400px;">
+                            <thead>
+                              <tr>
+                                <th>Hashtags</th>
+                                <th>Mentions</th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for row in 11_top_ten_hashtags.data %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ row.hashtag }}</strong>
+                                    </td>                              
+                                    <td>
+                                        <strong>{{ row.count }}</strong>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="pdf-flex pdf-flex-col pdf-gap-10">
+                        <div>
+                            <h2 class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                                Observations
+                            </h2>
+                            <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                                {% for insight in 11_top_ten_hashtags.insights.observations %}
+                                <li class="pdf-list-item">
+                                    <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                                </li>
+                                {% endfor %} 
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <div class="pdf-flex pdf-flex-col pdf-gap-10">
+                        <div>
+                            <h2 class="pdf-insights pdf-bg-primary pdf-bg-gradient-to-r pdf-from-primary-200 pdf-to-primary-50 pdf-text-primary-600 pdf-inline-block pdf-font-bold pdf-text-base pdf-rounded">
+                                Suggestions
+                            </h2>
+                            <ul class="pdf-list pdf-flex pdf-flex-col pdf-gap-5 pdf-list-none pdf-m-0 pdf-p-0">
+                                {% for insight in 11_top_ten_hashtags.insights.suggestions %}
+                                <li class="pdf-list-item">
+                                    <strong>{{ insight.title }}:</strong>{{ insight.description }}
+                                </li>
+                                {% endfor %} 
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+
+</html>

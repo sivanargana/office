@@ -1,0 +1,12 @@
+    options = {
+        'page-width': '508mm',
+        'page-height': '285.75mm',
+        'margin-top': '0mm',
+        'margin-bottom': '0mm',
+        'margin-left': '0mm',
+        'margin-right': '0mm',
+        'encoding': 'UTF-8',
+        'no-outline': None,
+        'enable-local-file-access': '',
+        'print-media-type': '',
+    }
