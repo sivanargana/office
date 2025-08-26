@@ -1,0 +1,51 @@
+{
+    "data": [
+        {
+            "id": 966726,
+            "employeeId": 80261,
+            "displayName": "Leela Sita Rama Krishna Chebrol",
+            "profileImageUrl": "profileimage/d5a50c802ada435498b5256cc7e2c90d.jpg",
+            "requesterId": 80261,
+            "requestDate": "2025-08-07",
+            "requestStatus": 2,
+            "requestType": 9,
+            "requestedOn": "2025-08-22T12:07:18.313",
+            "requesterName": "Leela Sita Rama Krishna Chebrol",
+            "requesterProfileImageUrl": "profileimage/d5a50c802ada435498b5256cc7e2c90d.jpg",
+            "requestMinutes": 120,
+            "startTime": {
+                "hours": 0,
+                "minutes": 0
+            },
+            "approverId": 1282786,
+            "approver": "krishnendu Bhattacharya",
+            "commentIdentifier": "ea29ec93-e2af-4199-a822-e2d73bdeea5f",
+            "note": "Hi Krishnendu, I left the office early due to an emergency work. Please approve my request.",
+            "dateApprovedRejected": "2025-08-22T13:17:34.03",
+            "adjustedShiftTime": "12:00 AM",
+            "approvalLog": [
+                {
+                    "approver": {
+                        "approverType": 1,
+                        "approverId": 1282786,
+                        "approverName": "krishnendu Bhattacharya",
+                        "approverProfileImageUrl": null,
+                        "jobTitle": null
+                    },
+                    "approvalStatus": 1,
+                    "approvalActionReason": null,
+                    "level": 1,
+                    "timeStamp": "2025-08-22T07:47:34.0055047Z",
+                    "comment": null,
+                    "requestMetaData": {}
+                }
+            ],
+            "notifyTo": [],
+            "reason": null,
+            "nextApprover": null
+        }
+    ],
+    "succeeded": true,
+    "message": "",
+    "errors": []
+}
